@@ -16,8 +16,12 @@ class Language extends Model
   protected $casts = [
     'iso_639_1' => 'string',
   ];
-  public function languages()
+  public function movieLanguages()
   {
     return $this->belongsToMany(MovieLanguage::class, 'movie_languages', 'language_id', 'movie_id');
+  }
+  public function tvSeriesLanguages()
+  {
+    return $this->belongsToMany(TvSeriesLanguage::class, 'tv_series_languages', 'language_id', 'tv_series_id');
   }
 }

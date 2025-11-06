@@ -19,7 +19,8 @@ return new class extends Migration
       $table->string('job')->nullable();
       $table->string('character')->nullable();
       $table->integer('order')->nullable();
-      $table->primary(['movie_id', 'credit_id']);
+      // Ensure uniqueness of movie/credit pair without conflicting with the UUID primary key
+      $table->unique(['movie_id', 'credit_id']);
       $table->timestamps();
     });
   }

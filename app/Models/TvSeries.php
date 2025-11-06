@@ -29,6 +29,7 @@ class TvSeries extends Model
     'number_of_episodes',
     'original_language',
     'origin_country',
+    'networks',
     'homepage',
     'in_production',
     'type',
@@ -50,6 +51,7 @@ class TvSeries extends Model
     'popularity' => 'float',
     'first_air_date' => 'date',
     'last_air_date' => 'date',
+    'networks' => 'array',
   ];
 
   public function seasons(): HasMany

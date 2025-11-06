@@ -11,12 +11,12 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('movie_genres', function (Blueprint $table) {
+    Schema::create('tv_series_genres', function (Blueprint $table) {
       $table->uuid('id')->primary();
       $table->foreignUuid('genre_id')->constrained('genres', 'id')->onDelete('cascade');
-      $table->foreignUuid('movie_id')->constrained('movies', 'id')->onDelete('cascade');
-      // Ensure uniqueness of genre/movie pair without conflicting with the UUID primary key
-      $table->unique(['genre_id', 'movie_id']);
+      $table->foreignUuid('tv_series_id')->constrained('tv_series', 'id')->onDelete('cascade');
+      // Ensure uniqueness of genre/tv_series pair without conflicting with the UUID primary key
+      $table->unique(['genre_id', 'tv_series_id']);
       $table->timestamps();
     });
   }
@@ -26,6 +26,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('movie_genres');
+    Schema::dropIfExists('tv_series_genres');
   }
 };

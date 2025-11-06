@@ -15,7 +15,8 @@ return new class extends Migration
       $table->uuid('id')->primary();
       $table->foreignUuid('movie_id')->nullable()->constrained('movies', 'id')->onDelete('set null');
       $table->foreignUuid('collection_id')->nullable()->constrained('collections', 'id')->onDelete('set null');
-      $table->primary(['movie_id', 'collection_id']);
+      // Ensure uniqueness of movie/collection pair without conflicting with the UUID primary key
+      $table->unique(['movie_id', 'collection_id']);
       $table->timestamps();
     });
   }

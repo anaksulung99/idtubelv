@@ -23,4 +23,9 @@ class Country extends Model
     return $this->belongsToMany(Movie::class, 'movie_countries', 'country_id', 'movie_id')
       ->withTimestamps();
   }
+  public function tvSeries()
+  {
+    return $this->belongsToMany(TvSeries::class, 'tv_series_countries', 'country_id', 'tv_series_id')
+      ->withTimestamps();
+  }
 }

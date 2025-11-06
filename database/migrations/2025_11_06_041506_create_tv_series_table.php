@@ -28,6 +28,7 @@ return new class extends Migration
       $table->integer('number_of_episodes')->unsigned()->nullable();
       $table->string('original_language')->nullable();
       $table->json('origin_country')->nullable();
+      $table->json('networks')->nullable();
       $table->string('homepage')->nullable();
       $table->boolean('in_production')->default(false);
       $table->string('type')->nullable();

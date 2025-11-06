@@ -26,6 +26,8 @@ return new class extends Migration
       $table->integer('runtime')->nullable();
       $table->float('vote_average')->nullable();
       $table->integer('vote_count')->nullable();
+      $table->json('crew')->nullable();
+      $table->json('guest_stars')->nullable();
       $table->timestamps();
     });
   }

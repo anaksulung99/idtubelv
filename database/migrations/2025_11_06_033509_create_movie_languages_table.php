@@ -15,7 +15,8 @@ return new class extends Migration
       $table->uuid('id')->primary();
       $table->foreignUuid('movie_id')->references('id')->on('movies')->onDelete('cascade');
       $table->foreignUuid('language_id')->references('id')->on('languages')->onDelete('cascade');
-      $table->primary(['movie_id', 'language_id']);
+      // Ensure uniqueness of movie/language pair without conflicting with the UUID primary key
+      $table->unique(['movie_id', 'language_id']);
       $table->timestamps();
     });
   }

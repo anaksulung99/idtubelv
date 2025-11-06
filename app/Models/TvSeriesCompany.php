@@ -6,31 +6,28 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MovieGenre extends Model
+class TvSeriesCompany extends Model
 {
-  /** @use HasFactory<\Database\Factories\MovieGenreFactory> */
+  /** @use HasFactory<\Database\Factories\TvSeriesCompanyFactory> */
   use HasFactory, HasUuids;
 
   protected $fillable = [
     'id',
-    'genre_id',
-    'movie_id',
+    'tv_series_id',
+    'company_id',
   ];
   protected $casts = [
-    'genre_id' => 'uuid',
-    'movie_id' => 'uuid',
+    'id' => 'uuid',
+    'tv_series_id' => 'uuid',
+    'company_id' => 'uuid',
   ];
   protected $dates = ['created_at', 'updated_at'];
-  public function movie()
-  {
-    return $this->belongsTo(Movie::class);
-  }
-  public function tvSeries()
+  public function series()
   {
     return $this->belongsTo(TvSeries::class);
   }
-  public function genre()
+  public function company()
   {
-    return $this->belongsTo(Genre::class);
+    return $this->belongsTo(Company::class);
   }
 }

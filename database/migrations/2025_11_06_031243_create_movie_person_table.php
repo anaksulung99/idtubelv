@@ -15,7 +15,8 @@ return new class extends Migration
       $table->uuid('id')->primary();
       $table->foreignUuid('movie_id')->constrained('movies', 'id')->onDelete('cascade');
       $table->foreignUuid('person_id')->constrained('persons', 'id')->onDelete('cascade');
-      $table->primary(['movie_id', 'person_id']);
+      // Ensure uniqueness of movie/person pair without conflicting with the UUID primary key
+      $table->unique(['movie_id', 'person_id']);
       $table->timestamps();
     });
   }

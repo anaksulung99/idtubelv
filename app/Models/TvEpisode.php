@@ -27,6 +27,8 @@ class TvEpisode extends Model
     'runtime',
     'vote_average',
     'vote_count',
+    'crew', // JSON field
+    'guest_stars', // JSON field
   ];
   protected $casts = [
     'vote_average' => 'float',
@@ -35,6 +37,8 @@ class TvEpisode extends Model
     'episode_number' => 'integer',
     'season_number' => 'integer',
     'air_date' => 'date',
+    'crew' => 'array',
+    'guest_stars' => 'array',
   ];
   protected $dates = [
     'air_date',
@@ -46,7 +50,28 @@ class TvEpisode extends Model
 
   public function series(): BelongsTo
   {
-    return $this->belongsTo(TvSeries::class, 'tv_series_id', 'id');
+    return $this->belongsTo(TvSeries::class, 'tv_series_id');
+  }
+  public function getCrewByDepartment(string $department): array
+  {
+    return collect($this->crew ?? [])
+      ->where('department', $department)
+      ->values()
+      ->toArray();
+  }
+  public function getDirectors(): array
+  {
+    return $this->getCrewByDepartment('Directing');
+  }
+
+  public function getWriters(): array
+  {
+    return $this->getCrewByDepartment('Writing');
+  }
+
+  public function getActors(): array
+  {
+    return $this->guest_stars ?? [];
   }
   public function getStillUrlAttribute(): ?string
   {

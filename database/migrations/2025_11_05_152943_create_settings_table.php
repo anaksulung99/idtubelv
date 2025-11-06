@@ -12,8 +12,12 @@ return new class extends Migration
    */
   public function up(): void
   {
+    // Ensure Postgres has UUID generation available
+    DB::statement('CREATE EXTENSION IF NOT EXISTS "pgcrypto";');
+
     Schema::create('settings', function (Blueprint $table) {
-      $table->uuid('id')->primary();
+      // Auto-generate UUIDs in Postgres using pgcrypto's gen_random_uuid()
+      $table->uuid('id')->primary()->default(DB::raw('gen_random_uuid()'));
       $table->string('key')->unique();
       $table->text('value')->nullable();
       $table->string('type')->default('text'); // text, textarea, image, email, etc
